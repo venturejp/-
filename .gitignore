@@ -1,0 +1,62 @@
+# 機密情報
+.env
+*.key
+*.pem
+credentials/
+secrets/
+api_keys/
+
+# MCP設定（APIキーを含む可能性）
+.claude/mcp_servers.json
+
+# 個人情報・顧客情報
+00_context/clients/
+client_info/
+
+# 一時ファイル
+*.tmp
+*.swp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+
+# ログ
+*.log
+logs/
+
+# Node modules（MCP関連）
+node_modules/
+package-lock.json
+yarn.lock
+
+# Python（もし使用する場合）
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# IDEファイル
+.vscode/
+.idea/
+*.sublime-*
+
+# OS生成ファイル
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# 大きなバイナリファイル
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.pdf
+*.mp4
+*.mov
+*.avi
