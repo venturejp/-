@@ -4,11 +4,12 @@
 
 ---
 
-## 連携予定のツール
+## 連携済みのツール
 
 1. ✅ **GitHub** - タスク・Issue管理
-2. ⏳ **Google Calendar** - スケジュール管理
-3. ⏳ **Google Sheets** - データ管理
+2. ✅ **Google Drive** - ファイル管理・ドキュメント操作
+3. ✅ **Google Calendar** - スケジュール管理
+4. ✅ **Google Sheets** - データ管理
 
 ---
 
@@ -56,7 +57,7 @@ gh issue create --title "テストIssue" --body "MCP連携テスト"
 
 ---
 
-## 2. Google Calendar連携
+## 2. Google Drive連携
 
 ### 前提条件
 - Googleアカウント
@@ -70,10 +71,10 @@ gh issue create --title "テストIssue" --body "MCP連携テスト"
 2. 新しいプロジェクトを作成（例: "AI-Management-System"）
 3. プロジェクトを選択
 
-#### 2-2. Google Calendar APIを有効化
+#### 2-2. Google Drive APIを有効化
 
 1. 「APIとサービス」→「ライブラリ」に移動
-2. "Google Calendar API"を検索
+2. "Google Drive API"を検索
 3. 「有効にする」をクリック
 
 #### 2-3. OAuth 2.0クライアントIDを作成
@@ -91,9 +92,9 @@ gh issue create --title "テストIssue" --body "MCP連携テスト"
 
 ```json
 {
-  "google-calendar": {
+  "google-drive": {
     "command": "npx",
-    "args": ["-y", "@cocal/google-calendar-mcp"],
+    "args": ["-y", "@piotr-agier/google-drive-mcp"],
     "env": {
       "GOOGLE_CLIENT_ID": "YOUR_CLIENT_ID",
       "GOOGLE_CLIENT_SECRET": "YOUR_CLIENT_SECRET"
@@ -106,30 +107,30 @@ gh issue create --title "テストIssue" --body "MCP連携テスト"
 
 Claudeで以下を試す：
 ```
-今日の予定を教えて
+Googleドライブのファイル一覧を表示して
 ```
 
 ---
 
-## 3. Google Sheets連携
+## 3. Google Calendar連携
 
 ### 前提条件
 - Googleアカウント
-- Google Calendar連携で作成したGoogle Cloud Platformプロジェクト
+- Google Cloud Platformプロジェクト
 
 ### セットアップ手順
 
-#### 3-1. Google Sheets APIを有効化
+#### 3-1. Google Calendar APIを有効化
 
 1. Google Cloud Console（https://console.cloud.google.com/）にアクセス
-2. 先ほど作成したプロジェクトを選択
+2. Google Driveで作成したプロジェクトを選択
 3. 「APIとサービス」→「ライブラリ」に移動
-4. "Google Sheets API"を検索
+4. "Google Calendar API"を検索
 5. 「有効にする」をクリック
 
 #### 3-2. 認証情報の設定
 
-Google Calendar連携で作成したOAuth 2.0クライアントIDを使用できます。
+Google Drive連携で作成したOAuth 2.0クライアントIDを使用できます。
 
 #### 3-3. MCP設定ファイルに追加
 
@@ -137,6 +138,68 @@ Google Calendar連携で作成したOAuth 2.0クライアントIDを使用でき
 
 ```json
 {
+  "google-drive": {
+    "command": "npx",
+    "args": ["-y", "@piotr-agier/google-drive-mcp"],
+    "env": {
+      "GOOGLE_CLIENT_ID": "YOUR_CLIENT_ID",
+      "GOOGLE_CLIENT_SECRET": "YOUR_CLIENT_SECRET"
+    }
+  },
+  "google-calendar": {
+    "command": "npx",
+    "args": ["-y", "@cocal/google-calendar-mcp"],
+    "env": {
+      "GOOGLE_CLIENT_ID": "YOUR_CLIENT_ID",
+      "GOOGLE_CLIENT_SECRET": "YOUR_CLIENT_SECRET"
+    }
+  }
+}
+```
+
+#### 3-4. 接続テスト
+
+Claudeで以下を試す：
+```
+今日の予定を教えて
+```
+
+---
+
+## 4. Google Sheets連携
+
+### 前提条件
+- Googleアカウント
+- Google Calendar連携で作成したGoogle Cloud Platformプロジェクト
+
+### セットアップ手順
+
+#### 4-1. Google Sheets APIを有効化
+
+1. Google Cloud Console（https://console.cloud.google.com/）にアクセス
+2. 同じプロジェクトを選択
+3. 「APIとサービス」→「ライブラリ」に移動
+4. "Google Sheets API"を検索
+5. 「有効にする」をクリック
+
+#### 4-2. 認証情報の設定
+
+Google Drive連携で作成したOAuth 2.0クライアントIDを使用できます。
+
+#### 4-3. MCP設定ファイルに追加
+
+`~/.claude/mcp_servers.json` に追記：
+
+```json
+{
+  "google-drive": {
+    "command": "npx",
+    "args": ["-y", "@piotr-agier/google-drive-mcp"],
+    "env": {
+      "GOOGLE_CLIENT_ID": "YOUR_CLIENT_ID",
+      "GOOGLE_CLIENT_SECRET": "YOUR_CLIENT_SECRET"
+    }
+  },
   "google-calendar": {
     "command": "npx",
     "args": ["-y", "@cocal/google-calendar-mcp"],
@@ -156,7 +219,7 @@ Google Calendar連携で作成したOAuth 2.0クライアントIDを使用でき
 }
 ```
 
-#### 3-4. 接続テスト
+#### 4-4. 接続テスト
 
 Claudeで以下を試す：
 ```
@@ -195,15 +258,21 @@ Claudeで以下を試す：
 #### GitHub
 - **用途**: タスク・Issue管理、プロジェクト進捗管理
 - **連携方法**: gh CLI
-- **リポジトリ**: [リポジトリ名]
+- **リポジトリ**: venturejp/-
+
+#### Google Drive
+- **用途**: ファイル管理、ドキュメント・Sheets・Slides操作
+- **連携方法**: MCP Server (@piotr-agier/google-drive-mcp)
+- **機能**: ファイル検索、読み取り、作成、更新、フォルダ管理
 
 #### Google Calendar
 - **用途**: スケジュール管理、工程表自動生成
-- **カレンダーID**: [カレンダーID]
+- **連携方法**: MCP Server (@cocal/google-calendar-mcp)
 - **注意事項**: プライベート予定は詳細を非表示に設定
 
 #### Google Sheets
 - **用途**: 経理データ管理、KPI追跡
+- **連携方法**: MCP Server (@modelcontextprotocol/server-google-sheets)
 - **主要スプレッドシート**:
   - 経理管理: [スプレッドシートURL]
   - プロジェクト一覧: [スプレッドシートURL]

@@ -116,45 +116,40 @@ Claudeは、以下の役割を担うAI経営パートナーです：
 ### 設定ガイド
 📖 **詳細な設定手順**: `.config/MCP_SETUP_GUIDE.md` を参照
 
-### 接続予定のツール
+### 接続済みのツール
 
-#### 1. GitHub（優先度：高）
+#### 1. GitHub ✅
 - **用途**: タスク・Issue管理、プロジェクト進捗管理
 - **連携方法**: GitHub CLI (`gh`)
-- **必要な設定**:
-  - gh CLIのインストール
-  - `gh auth login` で認証
+- **アカウント**: venturejp
+- **リポジトリ**: venturejp/-
 - **使用するスキル**: `/issue-triage`, `/daily-schedule`
 
-#### 2. Google Calendar（優先度：高）
+#### 2. Google Drive ✅
+- **用途**: ファイル管理、ドキュメント・Sheets・Slides操作
+- **連携方法**: MCP Server (`@piotr-agier/google-drive-mcp`)
+- **機能**: ファイル検索、読み取り、作成、更新、フォルダ管理
+- **使用するスキル**: `/write-draft`, `/article-team`
+
+#### 3. Google Calendar ✅
 - **用途**: スケジュール管理、毎朝の工程表自動生成
 - **連携方法**: MCP Server (`@cocal/google-calendar-mcp`)
-- **必要な設定**:
-  - Google Cloud Platform プロジェクト作成
-  - Calendar API 有効化
-  - OAuth 2.0 認証情報取得
 - **使用するスキル**: `/daily-schedule`
 
-#### 3. Google Sheets（優先度：中）
+#### 4. Google Sheets ✅
 - **用途**: 経理データ管理、KPI追跡
 - **連携方法**: MCP Server (`@modelcontextprotocol/server-google-sheets`)
-- **必要な設定**:
-  - Google Cloud Platform プロジェクト（Calendarと共通）
-  - Sheets API 有効化
-  - OAuth 2.0 認証情報取得
 - **使用するスキル**: `/update-finance`
 
-#### 4. Web検索・SNS（標準機能）
+#### 5. Web検索・SNS ✅
 - **用途**: トレンド調査、競合分析、情報収集
 - **連携方法**: WebSearchツール（Claude標準機能）
-- **必要な設定**: なし
 - **使用するスキル**: `/trend-check`
 
-### 設定状況
-- [⏳] GitHub - セットアップガイド作成済み
-- [⏳] Google Calendar - セットアップガイド作成済み
-- [⏳] Google Sheets - セットアップガイド作成済み
-- [✅] Web検索 - 標準機能として利用可能
+### 認証情報
+- **Google Cloud Platform プロジェクト**: AI-Management-System
+- **OAuth 2.0 クライアント**: 設定済み（Drive, Calendar, Sheets で共通使用）
+- **MCP設定ファイル**: `~/.claude/mcp_servers.json`
 
 ---
 
@@ -190,9 +185,11 @@ Claudeは、以下の役割を担うAI経営パートナーです：
 - ✅ `/article-team` スキル実装（6人のエージェントチーム）
 - ✅ Git管理の設定
 - ✅ GitHubへのプッシュ
+- ✅ GitHub CLI認証完了（venturejp）
+- ✅ Google Cloud Platform設定完了
+- ✅ MCP連携の実接続（GitHub, Google Drive, Google Calendar, Google Sheets）
 
 ### Phase 2（今後）
-- MCP連携の実接続（GitHub, Google Calendar, Google Sheets）
 - `/daily-schedule` スキルの実装
 - `/issue-triage` スキルの実装
 - `/agent-memory` スキルの実装
