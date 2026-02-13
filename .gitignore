@@ -8,6 +8,7 @@ api_keys/
 
 # MCP設定（APIキーを含む可能性）
 .claude/mcp_servers.json
+.mcp.json
 
 # 個人情報・顧客情報
 00_context/clients/

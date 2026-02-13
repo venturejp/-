@@ -4,6 +4,32 @@
 
 ---
 
+## 🚀 クイックスタート
+
+### MCP設定ファイルの作成
+
+リポジトリには`.mcp.json.template`が含まれています。以下の手順で設定してください：
+
+1. **テンプレートをコピー**
+   ```bash
+   cp .mcp.json.template .mcp.json
+   ```
+
+2. **認証情報を設定**
+   `.mcp.json`を編集して、以下の値を実際の認証情報に置き換えてください：
+   - `YOUR_GOOGLE_CLIENT_ID` → Google Cloud ConsoleのOAuth 2.0クライアントID
+   - `YOUR_GOOGLE_CLIENT_SECRET` → Google Cloud ConsoleのOAuth 2.0クライアントシークレット
+
+3. **Claude Codeを再起動**
+   ```bash
+   # セッションを終了してから再起動
+   claude code
+   ```
+
+⚠️ **重要**: `.mcp.json`には機密情報が含まれるため、Gitにコミットしないでください（`.gitignore`に追加済み）。
+
+---
+
 ## 連携済みのツール
 
 1. ✅ **GitHub** - タスク・Issue管理
